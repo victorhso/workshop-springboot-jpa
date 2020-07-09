@@ -18,6 +18,7 @@ public class TestConfig implements CommandLineRunner {
 	@Autowired 
 	private UserRepository userRepository;
 
+	//Povoando banco
 	@Override
 	public void run(String... args) throws Exception {
 		
