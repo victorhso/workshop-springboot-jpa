@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.devti.course.entities.Category;
 import com.devti.course.entities.Order;
+import com.devti.course.entities.OrderItem;
 import com.devti.course.entities.Products;
 import com.devti.course.entities.User;
 import com.devti.course.entities.enums.OrderStatus;
 import com.devti.course.repositories.CategoryRepository;
+import com.devti.course.repositories.OrderItemRepository;
 import com.devti.course.repositories.OrderRepository;
 import com.devti.course.repositories.ProductRepository;
 import com.devti.course.repositories.UserRepository;
@@ -35,6 +37,9 @@ public class TestConfig implements CommandLineRunner {
 
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 
 	// Povoando banco
 	@Override
@@ -74,6 +79,14 @@ public class TestConfig implements CommandLineRunner {
 		Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.Cancelado, u1);
 
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice()); 
+		
+		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+
 
 	}
 }
