@@ -23,7 +23,7 @@ public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // para dizer que ela é auto-incrementável
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Para dizer que ela é auto-incrementável
 	private Long id;
 	private Instant moment;
 
