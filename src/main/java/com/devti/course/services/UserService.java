@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.devti.course.entities.User;
 import com.devti.course.repositories.UserRepository;
+import com.devti.course.services.exceptions.ResourceNotFoundException;
 
 @Service // Registra a classe como componente do Spring
 public class UserService {
@@ -21,7 +22,7 @@ public class UserService {
 
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id)); //Se não existir um usuário,lançará uma excessão
 	}
 
 	// Inserindo no BD um novo objeto user
@@ -33,7 +34,7 @@ public class UserService {
 		repository.deleteById(id);
 	}
 
-	public User update(Long id, User obj) {
+	public User update(Long id, User obj) {	
 		User entity = repository.getOne(id); // Instancia um usuário um objeto monitorado no JPA e em seguida fazer
 												// operação com BD
 		updateData(entity, obj);
